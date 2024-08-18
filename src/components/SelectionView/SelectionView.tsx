@@ -1,14 +1,15 @@
-import { Combination, Faction } from "@/domain";
+import { Combination, Faction, Tier } from "@/domain";
+import { Selection } from "@/state/selection";
 import classNames from "classnames";
 
-export type SelectionProps = Props<{
-  combinations: Combination[];
+export type SelectionViewProps = Props<{
+  selection: Selection;
 }>;
 
-export function Selection({ combinations }: SelectionProps): JSX.Element {
+export function SelectionView({ selection }: SelectionViewProps): JSX.Element {
   return (
     <ul>
-      {combinations.map((combination) => (
+      {selection.map((combination) => (
         <li key={combinationKey(combination)}>
           {CombinationCard({ combination })}
         </li>
@@ -26,7 +27,7 @@ export function CombinationCard({
 }: CombinationCardProps): JSX.Element {
   return (
     <span className={classNames(FACTION_COLORS[combination.faction])}>
-      {combinationKey(combination)} ({combination.tier})
+      {combinationKey(combination)} ({Tier[combination.tier]})
     </span>
   );
 }

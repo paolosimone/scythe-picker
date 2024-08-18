@@ -1,1 +1,2 @@
-export { Selection } from "./Selection";
+export { FilterInput } from "./FilterInput";
+export { SelectionView } from "./SelectionView";

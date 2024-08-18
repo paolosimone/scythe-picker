@@ -8,7 +8,26 @@ export enum Faction {
   Togawa = "Togawa",
 }
 
-export const FACTIONS = Object.values(Faction);
+export const VANILLA_FACTIONS = [
+  Faction.Crimea,
+  Faction.Nordic,
+  Faction.Polania,
+  Faction.Rusviet,
+  Faction.Saxony,
+];
+
+export const INVADERS_FROM_AFAR_FACTIONS = [Faction.Albion, Faction.Togawa];
+
+export const ALL_FACTIONS = [
+  ...VANILLA_FACTIONS,
+  ...INVADERS_FROM_AFAR_FACTIONS,
+];
+
+export function maximumPlayersCount(invadersFromAfarEnabled: boolean): number {
+  return invadersFromAfarEnabled
+    ? ALL_FACTIONS.length
+    : VANILLA_FACTIONS.length;
+}
 
 export enum PlayerMat {
   Agricultural = "Agricultural",
@@ -20,7 +39,23 @@ export enum PlayerMat {
   Patriotic = "Patriotic",
 }
 
-export const PLAYER_MATS = Object.values(PlayerMat);
+export const VANILLA_PLAYER_MATS = [
+  PlayerMat.Agricultural,
+  PlayerMat.Engineering,
+  PlayerMat.Industrial,
+  PlayerMat.Mechanical,
+  PlayerMat.Patriotic,
+];
+
+export const INVADERS_FROM_PLAYER_MATS = [
+  PlayerMat.Innovative,
+  PlayerMat.Militant,
+];
+
+export const ALL_PLAYER_MATS = [
+  ...VANILLA_PLAYER_MATS,
+  ...INVADERS_FROM_PLAYER_MATS,
+];
 
 export enum Tier {
   F,

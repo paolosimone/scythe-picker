@@ -1,58 +1,52 @@
-import { Selection } from "@/components";
-import { Combination, ALL_COMBINATIONS } from "@/domain";
-import { useMemo } from "react";
+"use client";
+
+import { SelectionView } from "@/components";
+import { FilterInput, UpdateFilterAction } from "@/components/FilterInput";
+import { ALL_COMBINATIONS } from "@/domain";
+import { applyFilter, DEFAULT_SELECTION_FILTER } from "@/state/filter";
+import {
+  enumerateSelections,
+  randomChoice,
+  Selection,
+} from "@/state/selection";
+import { useMemo, useState } from "react";
+
+// TODO
+// tier range
+// Bid
+// Responsive UI
+// GH Pages
+// PWA
 
 export default function Home() {
-  let selections = useMemo(() => enumerateSelections(ALL_COMBINATIONS, 4), []);
-  let selected = useMemo(
-    () => (selections.length ? randomChoice(selections) : []),
-    [selections],
+  const [filter, setFilter] = useState(DEFAULT_SELECTION_FILTER);
+  const [selection, setSelection] = useState<Nullable<Selection>>(null);
+
+  const updateFilter = useMemo(
+    () => (update: UpdateFilterAction) => {
+      setSelection(null);
+      setFilter(update);
+    },
+    [setFilter, setSelection],
   );
+
+  const filteredSelections = useMemo(() => {
+    const combinations = applyFilter(filter, ALL_COMBINATIONS);
+    return enumerateSelections(combinations, filter.playersCount);
+  }, [filter]);
+
+  const shuffle = () =>
+    setSelection(
+      filteredSelections.length ? randomChoice(filteredSelections) : null,
+    );
+
   return (
     <main className="flex min-h-screen flex-col items-center">
       <h1 className="py-3 font-bold text-3xl">Scythe Picker</h1>
-      <span>Combinations found: {selections.length}</span>
-      <Selection combinations={selected} />
+      <FilterInput filter={filter} updateFilter={updateFilter} />
+      <span>Combinations found: {filteredSelections.length}</span>
+      <button onClick={shuffle}>Shuffle</button>
+      {selection && <SelectionView selection={selection} />}
     </main>
   );
-}
-
-function enumerateSelections(
-  combinations: Combination[],
-  playerCount: number,
-): Combination[][] {
-  let found: Combination[][] = [];
-
-  function enumerateRecursive(
-    selection: Combination[],
-    available: Combination[],
-  ) {
-    if (selection.length == playerCount) {
-      found.push(selection);
-      return;
-    }
-
-    for (const [i, combination] of available.entries()) {
-      const newSelection = [...selection, combination];
-      const newAvailable = available
-        .slice(i + 1)
-        .filter(
-          (c) =>
-            c.faction != combination.faction &&
-            c.playerMat != combination.playerMat,
-        );
-      enumerateRecursive(newSelection, newAvailable);
-    }
-  }
-
-  enumerateRecursive([], combinations);
-  return found;
-}
-
-function randomChoice<T>(list: T[]): T {
-  return list[randomInt(list.length)];
-}
-
-function randomInt(max: number): number {
-  return Math.floor(Math.random() * max);
 }
