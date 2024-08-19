@@ -1,1 +1,1 @@
-export * from "./UseStateObject";
+export * from "./UseLocalStorage";

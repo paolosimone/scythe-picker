@@ -3,6 +3,7 @@
 import { SelectionView } from "@/components";
 import { FilterInput, UpdateFilterAction } from "@/components/FilterInput";
 import { ALL_COMBINATIONS } from "@/domain";
+import { useLocalStorage } from "@/hooks";
 import { applyFilter, DEFAULT_SELECTION_FILTER } from "@/state/filter";
 import {
   enumerateSelections,
@@ -18,7 +19,10 @@ import { useMemo, useState } from "react";
 // Bid
 
 export default function Home() {
-  const [filter, setFilter] = useState(DEFAULT_SELECTION_FILTER);
+  const [filter, setFilter] = useLocalStorage(
+    "filter",
+    DEFAULT_SELECTION_FILTER,
+  );
   const [selection, setSelection] = useState<Nullable<Selection>>(null);
 
   const updateFilter = useMemo(
