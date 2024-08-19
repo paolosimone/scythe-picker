@@ -1,6 +1,8 @@
 import { maximumPlayersCount } from "@/domain";
 import { SelectionFilter } from "@/state/filter";
 import { Dispatch, FormEvent } from "react";
+import { PlayerCountSlider } from "./PlayerCountSlider";
+import { TierRangeSlider, TierRange } from "./TierRangeSlider";
 
 export type UpdateFilterAction = (
   prevFilter: SelectionFilter,
@@ -15,8 +17,7 @@ export function FilterInput({
   filter,
   updateFilter,
 }: FilterInputProps): JSX.Element {
-  const setNumberOfPlayers = (e: FormEvent<HTMLInputElement>) => {
-    let playersCount = Number((e.target as HTMLInputElement).value);
+  const setNumberOfPlayers = (playersCount: number) => {
     updateFilter((filter) => ({ ...filter, playersCount }));
   };
 
@@ -32,18 +33,23 @@ export function FilterInput({
     }));
   };
 
+  const setTierRange = ({ from, to }: TierRange) => {
+    updateFilter((filter) => ({
+      ...filter,
+      minTier: from,
+      maxTier: to,
+    }));
+  };
+
   return (
     <div>
       <div>
         <label>Number of players</label>
-        <input
-          type="range"
-          min={2}
-          max={maximumPlayersCount(filter.invadersFromAfarEnabled)}
+        <PlayerCountSlider
           value={filter.playersCount}
+          maxValue={maximumPlayersCount(filter.invadersFromAfarEnabled)}
           onChange={setNumberOfPlayers}
         />
-        <span>{filter.playersCount}</span>
       </div>
 
       <div>
@@ -52,6 +58,14 @@ export function FilterInput({
           type="checkbox"
           onChange={setInvadersFromAfar}
           checked={filter.invadersFromAfarEnabled}
+        />
+      </div>
+
+      <div>
+        <label>Tier Range</label>
+        <TierRangeSlider
+          range={{ from: filter.minTier, to: filter.maxTier }}
+          onChange={setTierRange}
         />
       </div>
     </div>

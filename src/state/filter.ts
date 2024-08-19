@@ -18,7 +18,7 @@ export const DEFAULT_SELECTION_FILTER: SelectionFilter = {
   playersCount: 5,
   invadersFromAfarEnabled: false,
   minTier: Tier.F,
-  maxTier: Tier.SS,
+  maxTier: Tier.S,
 };
 
 export function applyFilter(

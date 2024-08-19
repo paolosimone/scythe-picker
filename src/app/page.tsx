@@ -12,11 +12,10 @@ import {
 import { useMemo, useState } from "react";
 
 // TODO
-// tier range
-// Bid
 // Responsive UI
 // GH Pages
 // PWA
+// Bid
 
 export default function Home() {
   const [filter, setFilter] = useState(DEFAULT_SELECTION_FILTER);
