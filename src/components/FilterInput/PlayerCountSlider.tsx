@@ -1,9 +1,11 @@
 import { Dispatch, useEffect, useRef } from "react";
 import nouislider, {
+  PipsMode,
   API as SliderAPI,
   Options as SliderOptions,
 } from "nouislider";
 import "nouislider/dist/nouislider.css";
+import classNames from "classnames";
 
 export type PlayerCountSliderProps = Props<{
   value: number;
@@ -15,6 +17,7 @@ export function PlayerCountSlider({
   value,
   maxValue,
   onChange,
+  className,
 }: PlayerCountSliderProps): JSX.Element {
   const containerRef = useRef<HTMLDivElement>(null);
   const sliderRef = useRef<Nullable<PlayerCountSliderAPI>>(null);
@@ -32,7 +35,11 @@ export function PlayerCountSlider({
   useEffect(() => sliderRef.current?.setValue(value), [value]);
   useEffect(() => sliderRef.current?.setMaxValue(maxValue), [maxValue]);
 
-  return <div className="" ref={containerRef} />;
+  return (
+    <div className={classNames("pt-2 pb-16 px-4", className)}>
+      <div ref={containerRef} />
+    </div>
+  );
 }
 
 class PlayerCountSliderAPI {
@@ -46,11 +53,16 @@ class PlayerCountSliderAPI {
       },
       start: 4,
       step: 1,
-      tooltips: true,
       format: {
         // integer without decimals
         to: (value) => Math.round(value),
         from: (value) => parseInt(value),
+      },
+      pips: {
+        mode: PipsMode.Steps,
+        density: 100,
+        // large values
+        filter: (_value) => 1,
       },
     };
 

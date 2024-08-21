@@ -8,6 +8,7 @@ import {
 } from "@/domain";
 
 export type SelectionFilter = {
+  version: number;
   playersCount: number;
   invadersFromAfarEnabled: boolean;
   minTier: Tier;
@@ -15,6 +16,8 @@ export type SelectionFilter = {
 };
 
 export const DEFAULT_SELECTION_FILTER: SelectionFilter = {
+  // update version when altering SelectionFilter
+  version: 1,
   playersCount: 5,
   invadersFromAfarEnabled: false,
   minTier: Tier.F,

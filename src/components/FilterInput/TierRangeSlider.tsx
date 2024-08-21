@@ -1,5 +1,6 @@
 import { Dispatch, useEffect, useRef } from "react";
 import nouislider, {
+  PipsMode,
   API as SliderAPI,
   Options as SliderOptions,
 } from "nouislider";
@@ -37,7 +38,11 @@ export function TierRangeSlider({
   useEffect(() => sliderRef.current?.onChange(onChange), [onChange]);
   useEffect(() => sliderRef.current?.setValue(range), [range]);
 
-  return <div className={classNames(className)} ref={containerRef} />;
+  return (
+    <div className={classNames("pt-2 pb-16 px-4", className)}>
+      <div ref={containerRef} />
+    </div>
+  );
 }
 
 class TierRangeSliderAPI {
@@ -52,11 +57,20 @@ class TierRangeSliderAPI {
       start: [Tier.F, Tier.S],
       connect: true,
       step: 1,
-      tooltips: true,
       format: {
         to: (value) => Tier[Math.round(value)],
         // here value is already a number, no idea why
         from: (value) => parseInt(value),
+      },
+      pips: {
+        mode: PipsMode.Steps,
+        density: 100,
+        // large values
+        filter: (_value) => 1,
+        format: {
+          to: (value) => Tier[Math.round(value)],
+          from: (value) => parseInt(value),
+        },
       },
     };
 
