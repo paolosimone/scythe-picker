@@ -2,6 +2,10 @@
 
 Randomly selects a starting faction/board combination for the game of [Scythe](https://stonemaiergames.com/games/scythe/).
 
+The Web App is available at https://paolosimone.github.io/scythe-picker/
+
+[--> Try it now! <--](https://paolosimone.github.io/scythe-picker/)
+
 With respect to existing companion apps it also allows to optionally **limit the selection in a tier range** to keep the game as fair as possible.
 The reference tier list has been created by the community (see [this thread](https://boardgamegeek.com/thread/2410237/new-scythe-tier-list)):
 
