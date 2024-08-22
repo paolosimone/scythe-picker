@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: "Scythe Picker",
   description: "Randomly select Scythe factions initial setup",
   generator: "Next.js",
-  manifest: "/manifest.json",
+  manifest: "/scythe-picker/manifest.json",
   keywords: ["Scythe", "Board", "Game", "Picker", "Setup"],
   themeColor: [{ media: "(prefers-color-scheme: dark)", color: "#fff" }],
   authors: [
@@ -20,8 +20,8 @@ export const metadata: Metadata = {
   viewport:
     "minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover",
   icons: [
-    { rel: "apple-touch-icon", url: "icons/scythe-128x128.png" },
-    { rel: "icon", url: "icons/scythe-128x128.png" },
+    { rel: "apple-touch-icon", url: "scythe-picker/icons/scythe-128x128.png" },
+    { rel: "icon", url: "scythe-picker/icons/scythe-128x128.png" },
   ],
 };
 
