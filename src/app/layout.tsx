@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { League_Gothic } from "next/font/google";
+import { Roboto } from "next/font/google";
 import "./globals.css";
 
-const font = League_Gothic({ subsets: ["latin"] });
+const font = Roboto({ subsets: ["latin"], weight: "400" });
 
 export const metadata: Metadata = {
   title: "Scythe Picker",

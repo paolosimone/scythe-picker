@@ -1,12 +1,23 @@
 "use client";
 
+import { League_Gothic } from "next/font/google";
 import { Picker } from "@/components/Picker/Picker";
+import classNames from "classnames";
+
+const titleFont = League_Gothic({ subsets: ["latin"] });
 
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center text-lg px-6 py-3 gap-3">
       {/* Title */}
-      <h1 className="self-center font-bold text-4xl">Scythe Picker</h1>
+      <h1
+        className={classNames(
+          "self-center font-bold text-5xl",
+          titleFont.className,
+        )}
+      >
+        Scythe Picker
+      </h1>
 
       {/* Github */}
       <iframe

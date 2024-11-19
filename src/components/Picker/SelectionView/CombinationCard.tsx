@@ -17,7 +17,7 @@ export function CombinationCard({
       style={{ gridTemplateColumns: "8fr 4fr" }}
     >
       <div className="flex flex-col justify-center items-start">
-        <span>{combination.faction}</span>
+        <span className="font-bold">{combination.faction}</span>
         <span>{combination.playerMat}</span>
       </div>
 
